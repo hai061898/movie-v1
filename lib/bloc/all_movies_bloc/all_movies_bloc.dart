@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/data/models/movie_response.dart';
 import 'package:movie/data/services/movie_service.dart';
+
 import 'package:stream_transform/stream_transform.dart';
 
 part 'all_movies_event.dart';
@@ -18,14 +19,14 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  MovieBloc({required this.movieRepository}) : super(const MovieState()) {
+  MovieBloc({required this.movieService}) : super(const MovieState()) {
     on<MovieFetched>(
       _onMovieFetched,
       transformer: throttleDroppable(throttleDuration),
     );
   }
 
-  final MovieRepository movieRepository;
+  final MovieService movieService;
   int totalData = 0;
 
   Future<void> _onMovieFetched(
@@ -59,7 +60,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   }
 
   Future<List<Movie>> _fetchMovies(int page) async {
-    MovieResponse movieResponse = await movieRepository.getMovies(page);
+    MovieResponse movieResponse = await movieService.getMovies(page);
 
     if (!movieResponse.hasError) {
       totalData = movieResponse.totalResults;
