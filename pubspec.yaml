@@ -88,7 +88,7 @@ flutter:
       fonts:
         - asset: assets/fonts/Nunito-Regular.ttf
 
-    - family: NunitoBold
+    - family: NunitoBoldt   
       fonts:
         - asset: assets/fonts/Nunito-ExtraBold.ttf
     # - family: Schyler
