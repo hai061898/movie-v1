@@ -3,6 +3,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:movie/bloc/controllers/movie_controller.dart';
 import 'package:movie/data/models/movie_response.dart';
 import 'package:movie/data/services/movie_service.dart';
+import 'package:movie/ui/screens/details/movie_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -34,8 +35,8 @@ class MoviesListHorizontal extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => MovieDetailScreen(
-                        MovieController: MovieController,
-                        movieRepository: movieService,
+                        movieController: movieController,
+                        movieService: movieService,
                         movieId: movies[index].id),
                   ),
                 );
